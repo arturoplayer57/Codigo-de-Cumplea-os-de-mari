@@ -1,0 +1,279 @@
+:root {
+  --bg-gradient: linear-gradient(135deg, #fff0f5 0%, #ffe4e1 50%, #ffd1dc 100%);
+  --primary-pink: #f8a5c2;
+  --dark-pink: #f78fb3;
+  --envelope-base: #f7d7e4;
+  --envelope-pocket: #f8a5c2;
+  --envelope-flap: #f368e0;
+  --text-dark: #5c3c46;
+  --card-bg: rgba(255, 255, 255, 0.7);
+  --shadow: 0 10px 30px rgba(247, 143, 179, 0.25);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Poppins', sans-serif;
+  background: var(--bg-gradient);
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: var(--text-dark);
+  padding: 20px;
+  position: relative;
+  overflow-x: hidden;
+}
+
+#confetti-canvas {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  pointer-events: none;
+  z-index: 99;
+}
+
+.container {
+  max-width: 1000px;
+  width: 100%;
+  text-align: center;
+  z-index: 1;
+}
+
+.header {
+  margin-bottom: 40px;
+}
+
+.badge {
+  background: #ffffff;
+  padding: 6px 16px;
+  border-radius: 20px;
+  font-size: 0.9rem;
+  color: var(--dark-pink);
+  font-weight: 600;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+}
+
+.header h1 {
+  font-family: 'Dancing Script', cursive;
+  font-size: 3.5rem;
+  color: #d81b60;
+  margin: 15px 0 10px;
+}
+
+.header p {
+  color: #7a5261;
+  font-size: 1.1rem;
+}
+
+/* Grilla de sobres */
+.envelopes-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 30px;
+}
+
+.envelope-card {
+  background: var(--card-bg);
+  backdrop-filter: blur(10px);
+  padding: 20px;
+  border-radius: 20px;
+  box-shadow: var(--shadow);
+  border: 2px solid rgba(255, 255, 255, 0.8);
+  cursor: pointer;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  width: 260px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.envelope-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 15px 35px rgba(247, 143, 179, 0.4);
+}
+
+/* Diseño del sobre */
+.envelope {
+  position: relative;
+  width: 200px;
+  height: 140px;
+  background-color: var(--envelope-base);
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+  overflow: hidden;
+}
+
+.pocket {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 0;
+  border-left: 100px solid #f8a5c2;
+  border-right: 100px solid #f8a5c2;
+  border-top: 70px solid transparent;
+  border-bottom: 70px solid #f8a5c2;
+  z-index: 3;
+}
+
+.flap {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 0;
+  height: 0;
+  border-left: 100px solid transparent;
+  border-right: 100px solid transparent;
+  border-top: 75px solid #f78fb3;
+  transform-origin: top;
+  transition: transform 0.4s ease, z-index 0.4s ease;
+  z-index: 4;
+}
+
+.letter {
+  position: absolute;
+  bottom: 10px;
+  left: 15px;
+  right: 15px;
+  height: 110px;
+  background: white;
+  border-radius: 6px;
+  z-index: 2;
+  transition: transform 0.4s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.letter-preview {
+  font-size: 0.85rem;
+  color: var(--dark-pink);
+  font-weight: 600;
+}
+
+.heart-seal {
+  position: absolute;
+  top: 60px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 5;
+  font-size: 1.5rem;
+  transition: opacity 0.3s ease;
+}
+
+/* Animación Hover del sobre */
+.envelope-card:hover .flap {
+  transform: rotateX(180deg);
+  z-index: 1;
+}
+
+.envelope-card:hover .letter {
+  transform: translateY(-30px);
+}
+
+.envelope-label {
+  margin-top: 15px;
+  font-weight: 600;
+  color: var(--text-dark);
+}
+
+/* Modal */
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(5px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+  z-index: 100;
+}
+
+.modal.active {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.modal-content {
+  background: #ffffff;
+  padding: 25px;
+  border-radius: 24px;
+  max-width: 500px;
+  width: 90%;
+  position: relative;
+  transform: scale(0.8);
+  transition: transform 0.3s ease;
+  box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+  border: 3px solid var(--primary-pink);
+}
+
+.modal.active .modal-content {
+  transform: scale(1);
+}
+
+.close-btn {
+  position: absolute;
+  top: 15px;
+  right: 20px;
+  background: #ffe4e1;
+  border: none;
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+  font-size: 1.5rem;
+  color: var(--dark-pink);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s;
+}
+
+.close-btn:hover {
+  background: var(--dark-pink);
+  color: white;
+}
+
+.img-container {
+  width: 100%;
+  max-height: 320px;
+  overflow: hidden;
+  border-radius: 16px;
+  margin-bottom: 15px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+}
+
+.img-container img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.modal-text h2 {
+  font-family: 'Dancing Script', cursive;
+  font-size: 2.2rem;
+  color: #d81b60;
+  margin-bottom: 8px;
+}
+
+.modal-text p {
+  color: #666;
+  font-size: 0.95rem;
+  line-weight: 1.5;
+}
