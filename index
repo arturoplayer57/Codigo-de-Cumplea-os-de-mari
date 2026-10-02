@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>¡Feliz Cumpleaños! 💖</title>
+  <link rel="stylesheet" href="style.css">
+  <!-- Fuentes bonitas de Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600;700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+  <!-- Confetti Canvas Library -->
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+</head>
+<body>
+
+  <!-- Canvas para confeti de fondo -->
+  <canvas id="confetti-canvas"></canvas>
+
+  <div class="container">
+    <header class="header">
+      <span class="badge">🌸 ¡Un día especial! 🌸</span>
+      <h1>¡Feliz Cumpleaños! 💕</h1>
+      <p>Abre cada uno de los 7 sobres para descubrir las sorpresas especiales que hay para ti.</p>
+    </header>
+
+    <!-- GRILLA DE 7 SOBRES -->
+    <div class="envelopes-grid">
+      
+      <!-- Sobre 1 -->
+      <div class="envelope-card" data-img="https://kommodo.ai/i/obuXUZBuyNJ92o2BSH1Y" data-title="Recuerdo #1 🌸" data-desc="Un momento inolvidable. ¡Que este nuevo año empiece lleno de alegría y sorpresas!">
+        <div class="envelope">
+          <div class="flap"></div>
+          <div class="pocket"></div>
+          <div class="letter">
+            <span class="letter-preview">💌 Abre me</span>
+          </div>
+          <div class="heart-seal">❤️</div>
+        </div>
+        <p class="envelope-label">Sobre 1</p>
+      </div>
+
+      <!-- Sobre 2 -->
+      <div class="envelope-card" data-img="foto2.jpg" data-title="Momentos Especiales 💖" data-desc="Gracias por sacar siempre una sonrisa. ¡Disfruta muchísimo tu día!">
+        <div class="envelope">
+          <div class="flap"></div>
+          <div class="pocket"></div>
+          <div class="letter">
+            <span class="letter-preview">💌 Abre me</span>
+          </div>
+          <div class="heart-seal">💖</div>
+        </div>
+        <p class="envelope-label">Sobre 2</p>
+      </div>
+
+      <!-- Sobre 3 -->
+      <div class="envelope-card" data-img="foto3.jpg" data-title="El Mejor Deseo ✨" data-desc="Deseo que todos tus sueños y metas se cumplan hoy y siempre.">
+        <div class="envelope">
+          <div class="flap"></div>
+          <div class="pocket"></div>
+          <div class="letter">
+            <span class="letter-preview">💌 Abre me</span>
+          </div>
+          <div class="heart-seal">💕</div>
+        </div>
+        <p class="envelope-label">Sobre 3</p>
+      </div>
+
+      <!-- Sobre 4 -->
+      <div class="envelope-card" data-img="foto4.jpg" data-title="Aventuras y Risas 🌟" data-desc="Por todos los viajes, risas y momentos compartidos que aún están por venir.">
+        <div class="envelope">
+          <div class="flap"></div>
+          <div class="pocket"></div>
+          <div class="letter">
+            <span class="letter-preview">💌 Abre me</span>
+          </div>
+          <div class="heart-seal">💗</div>
+        </div>
+        <p class="envelope-label">Sobre 4</p>
+      </div>
+
+      <!-- Sobre 5 -->
+      <div class="envelope-card" data-img="foto5.jpg" data-title="Siempre Sonriendo 😊" data-desc="Nunca pierdas esa bonita energía que contagias a todos los que te rodean.">
+        <div class="envelope">
+          <div class="flap"></div>
+          <div class="pocket"></div>
+          <div class="letter">
+            <span class="letter-preview">💌 Abre me</span>
+          </div>
+          <div class="heart-seal">🌺</div>
+        </div>
+        <p class="envelope-label">Sobre 5</p>
+      </div>
+
+      <!-- Sobre 6 -->
+      <div class="envelope-card" data-img="foto6.jpg" data-title="Un Día Inolvidable 🎂" data-desc="Que celebres rodeado/a de las personas que más te quieren. ¡A comer pastel!">
+        <div class="envelope">
+          <div class="flap"></div>
+          <div class="pocket"></div>
+          <div class="letter">
+            <span class="letter-preview">💌 Abre me</span>
+          </div>
+          <div class="heart-seal">🎀</div>
+        </div>
+        <p class="envelope-label">Sobre 6</p>
+      </div>
+
+      <!-- Sobre 7 -->
+      <div class="envelope-card" data-img="foto7.jpg" data-title="Sorpresa Final 🎁" data-desc="¡Felicidades en tu día! Gracias por ser alguien tan especial en mi vida.">
+        <div class="envelope">
+          <div class="flap"></div>
+          <div class="pocket"></div>
+          <div class="letter">
+            <span class="letter-preview">💌 Abre me</span>
+          </div>
+          <div class="heart-seal">👑</div>
+        </div>
+        <p class="envelope-label">Sobre 7</p>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Modal / Ventana emergente al abrir un sobre -->
+  <div class="modal" id="photoModal">
+    <div class="modal-content">
+      <button class="close-btn" id="closeModal">&times;</button>
+      <div class="modal-body">
+        <div class="img-container">
+          <img id="modalImg" src="" alt="Sorpresa de cumpleaños">
+        </div>
+        <div class="modal-text">
+          <h2 id="modalTitle">Título</h2>
+          <p id="modalDesc">Descripción</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
